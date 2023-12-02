@@ -29,5 +29,5 @@ def find_calibration_values(path: str) -> int:
 
 
 if __name__ == "__main__":
-    print("example:", find_calibration_values("01/example01.txt"))
+    print("example:", find_calibration_values("01/example01_1.txt"))
     print("input:", find_calibration_values("01/input01.txt"))
