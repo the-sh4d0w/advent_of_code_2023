@@ -1,16 +1,17 @@
-"""Day 2: Cube Conundrum (https://adventofcode.com/2023/day/2)
-Code for solving part one."""
+"""Day 2: Cube Conundrum (https://adventofcode.com/2023/day/2#part2)
+Code for solving part two.
+"""
 
 
-def get_possible_games(path: str) -> int:
-    """Get the sum of the ids of possible games.
-    Possible games can't contain more than 12 red, 13 green or 14 blue cubes.
+def get_fewest_number(path: str) -> int:
+    """Get the sum of the powers of the games.
+    The power is the minimum amount of cubes multiplied.
 
     Arguments:
         - path: path to input.
 
     Returns:
-        The sum of ids.
+        The sum of powers.
     """
     with open(path, "r", encoding="utf-8") as f:
         lines = f.readlines()
@@ -28,11 +29,9 @@ def get_possible_games(path: str) -> int:
                 if amount > max_amount[index]:
                     max_amount[index] = amount
             games[int(game_id)] = max_amount
-    games = {game: amount for game, amount in games.items()
-             if not (amount[0] > 12 or amount[1] > 13 or amount[2] > 14)}
-    return sum(games.keys())
+    return sum([r * g * b for r, g, b in games.values()])
 
 
 if __name__ == "__main__":
-    print("example:", get_possible_games("02/example02_1.txt"))
-    print("input:", get_possible_games("02/input02.txt"))
+    print("example:", get_fewest_number("02/example02_2.txt"))
+    print("input:", get_fewest_number("02/input02.txt"))
