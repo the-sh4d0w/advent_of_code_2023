@@ -61,13 +61,13 @@ def main() -> None:
     """Do setup."""
     args = arg_parser.parse_args()
 
-    # wait until release of task
+    # wait until release of task; +30 seconds to prevent bug
     if args.wait and datetime.datetime(args.year, 12, args.day, 6) \
             > datetime.datetime.now():
         print(f"Waiting until task releases at {args.year}-12-{args.day}"
               "T06:00:00+01:00.")
         time.sleep((datetime.datetime(args.year, 12, args.day, 6)
-                    - datetime.datetime.now()).total_seconds())
+                    - datetime.datetime.now()).total_seconds() + 30)
     url = f"https://{DOMAIN}/{args.year}/day/{args.day}"
 
     # exit if session cookie file doesn't exist
@@ -120,7 +120,6 @@ def main() -> None:
                       data=f"Part {args.part} of {args.year}-12-{args.day:02}"
                       " finished downloading.",
                       headers={"Title": "Advent of Code Setup",
-                               "Priority": "urgent",
                                "Tags": "christmas_tree"})
 
 
